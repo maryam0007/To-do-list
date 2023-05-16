@@ -103,11 +103,6 @@ Github Page
 - GitHub: [@githubhandle](https://github.com/maryam0007)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/maryam-bakhtawar-516603267/)
 
-👤 ****
-
-- GitHub: [@githubhandle]()
-- LinkedIn: [LinkedIn]()
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
