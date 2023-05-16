@@ -2,8 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    mode: 'development', // Set the mode to 'development' or 'production'
-    // Rest of your webpack configuration...
+  mode: 'development', // Set the mode to 'development' or 'production'
+  // Rest of your webpack configuration...
   entry: './src/index.js',
   devServer: {
     static: './dist',
