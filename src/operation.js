@@ -14,7 +14,7 @@ export default class Todo {
   addTask = (e) => {
     e.preventDefault();
     const task = {
-      index: this.tasks.length,
+      index: this.tasks.length + 1,
       description: input.value,
       completed: false,
     };
@@ -48,7 +48,7 @@ export default class Todo {
   removeTask = (i) => {
     const filteredTasks = this.tasks.filter((task) => task.index !== +i);
     filteredTasks.forEach((task, index) => {
-      task.index = index;
+      task.index = index + 1;
     });
     setLocalStorage(filteredTasks);
     this.displayTasks();
