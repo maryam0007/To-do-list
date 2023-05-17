@@ -3,7 +3,6 @@ import { getFromLocalStorage, setLocalStorage } from './local_storage.js';
 import Todo from './operation.js';
 import './style.css';
 
-
 const btnAdd = document.querySelector('.btn-add');
 const tasksList = document.querySelector('.list');
 

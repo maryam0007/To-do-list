@@ -23,7 +23,7 @@ export default class Todo {
     this.displayTasks();
     input.value = '';
   };
-  
+
   displayTasks = () => {
     this.tasks = getFromLocalStorage();
     this.tasks.sort((a, b) => a.index - b.index);
