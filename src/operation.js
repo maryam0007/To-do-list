@@ -1,5 +1,3 @@
-/** @format */
-
 import { getFromLocalStorage, setLocalStorage } from './local_storage.js';
 
 export default class Todo {

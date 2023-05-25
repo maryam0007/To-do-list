@@ -1,7 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-
 import Todo from './operation.js';
 
 describe('Manipulate Add and delete Tasks', () => {
