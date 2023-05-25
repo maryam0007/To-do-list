@@ -1,9 +1,5 @@
-/** @format */
-
 import { getFromLocalStorage, setLocalStorage } from './local_storage.js';
 
-const input = document.querySelector('.input');
-const tasksList = document.querySelector('.list');
 export default class Todo {
   tasks;
 
@@ -11,22 +7,21 @@ export default class Todo {
     this.tasks = getFromLocalStorage();
   }
 
-  addTask = (e) => {
-    e.preventDefault();
+  addTask = (disc) => {
     const task = {
-      index: this.tasks.length + 1,
-      description: input.value,
+      index: this.tasks.length,
+      description: disc,
       completed: false,
     };
     this.tasks.push(task);
     setLocalStorage(this.tasks);
     this.displayTasks();
-    input.value = '';
   };
 
   displayTasks = () => {
     this.tasks = getFromLocalStorage();
     this.tasks.sort((a, b) => a.index - b.index);
+    const tasksList = document.querySelector('.list');
     tasksList.innerHTML = '';
     this.tasks.forEach((task) => {
       tasksList.innerHTML += `
@@ -48,9 +43,10 @@ export default class Todo {
   removeTask = (i) => {
     const filteredTasks = this.tasks.filter((task) => task.index !== +i);
     filteredTasks.forEach((task, index) => {
-      task.index = index + 1;
+      task.index = index;
     });
     setLocalStorage(filteredTasks);
+    this.tasks = getFromLocalStorage();
     this.displayTasks();
   };
 
@@ -66,6 +62,15 @@ export default class Todo {
       (task) => task.completed === false,
     );
     setLocalStorage(unCompletedTasks);
+    this.displayTasks();
+  };
+
+  editTask = (i, value) => {
+    const task = this.tasks.find((task) => task.index === +i);
+    if (task) {
+      task.description = value.trim();
+    }
+    setLocalStorage(this.tasks);
     this.displayTasks();
   };
 }

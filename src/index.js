@@ -6,6 +6,7 @@ import './style.css';
 const btnAdd = document.querySelector('.btn-add');
 const tasksList = document.querySelector('.list');
 const btnClear = document.querySelector('.btn-clear');
+const input = document.querySelector('.input');
 
 const todo = new Todo();
 
@@ -14,6 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 btnAdd.addEventListener('click', todo.addTask);
+btnAdd.addEventListener('click', (e) => {
+  e.preventDefault();
+  todo.addTask(input.value);
+  input.value = '';
+});
 
 tasksList.addEventListener('click', (e) => {
   if (e.target.classList.contains('remove')) {
