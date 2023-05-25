@@ -11,7 +11,7 @@ export default class Todo {
 
   addTask = (disc) => {
     const task = {
-      index: this.tasks.length + 1,
+      index: this.tasks.length,
       description: disc,
       completed: false,
     };
@@ -27,27 +27,28 @@ export default class Todo {
     tasksList.innerHTML = '';
     this.tasks.forEach((task) => {
       tasksList.innerHTML += `
-        <li class="task">
-          <div class="content">
-            <input class="checkbox" type="checkbox" ${task.completed ? 'checked' : ''} id="${task.index}">
-            <input type="text" id="${task.index}" value="${task.description}" ${
-        task.completed ? "class='disc completed'" : "class='disc'"
-      }></input>
-          </div>
-          <button type="button" class="btn btn-remove">
-            <i id="${task.index}" class="fa fa-times remove" aria-hidden="true"></i>
-          </button>
+        <li class="task"><div class="content"> <input class="checkbox" type="checkbox" ${
+          task.completed ? 'checked' : 'unchecked'
+        } id="${task.index}"> <input type="text" id="${task.index}" value="${
+          task.description
+        }" ${
+          task.completed ? "class='disc completed'" : "class='disc '"
+        }></input></div>
+            <button type="button" class="btn btn-remove"><i id="${
+              task.index
+            }" class="fa fa-times remove" aria-hidden="true"></i></button>
         </li>
-      `;
+  `;
     });
   };
 
   removeTask = (i) => {
-    this.tasks.splice(i, 1);
-    this.tasks.forEach((task, index) => {
+    const filteredTasks = this.tasks.filter((task) => task.index !== +i);
+    filteredTasks.forEach((task, index) => {
       task.index = index;
     });
-    setLocalStorage(this.tasks);
+    setLocalStorage(filteredTasks);
+    this.tasks = getFromLocalStorage();
     this.displayTasks();
   };
 
@@ -59,8 +60,19 @@ export default class Todo {
   };
 
   clearAll = () => {
-    const unCompletedTasks = this.tasks.filter((task) => !task.completed);
+    const unCompletedTasks = this.tasks.filter(
+      (task) => task.completed === false,
+    );
     setLocalStorage(unCompletedTasks);
+    this.displayTasks();
+  };
+
+  editTask = (i, value) => {
+    const task = this.tasks.find((task) => task.index === +i);
+    if (task) {
+      task.description = value.trim();
+    }
+    setLocalStorage(this.tasks);
     this.displayTasks();
   };
 }
